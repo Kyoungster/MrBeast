@@ -1,0 +1,32 @@
+async function apiCall(event, score) {
+    data = {
+        event: event,
+        gravity: 0.25,
+        jump: -4.6,
+        pipeheight: 200,
+        position: 5006.5,
+        rotation: 90,
+        score: score,
+        velocity: 49
+    }
+    Controller.prototype.SubmitObject(data, url, on_success, type, retry);
+    if (event == "score") {
+        score += 1
+    }
+}
+retry = true
+type = "POST"
+on_success = null
+url = "api/do-event"
+score = 0
+
+await apiCall("start", score)
+
+
+async function startScoring() {
+    for (i=0; i<300; i++) {
+        await apiCall("score", score)
+    }
+}
+
+await startScoring()

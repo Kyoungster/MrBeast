@@ -1,0 +1,18 @@
+function triggerMouseEvent (node, eventType) {
+    var clickEvent = document.createEvent ('MouseEvents');
+    clickEvent.initEvent (eventType, true, true);
+    node.dispatchEvent (clickEvent);
+}
+
+var targetNode = document.querySelector ("button");
+
+if (targetNode) {
+    triggerMouseEvent (targetNode, "mouseover");
+    triggerMouseEvent (targetNode, "mousedown");
+    await new Promise(r => setTimeout(r, 68997)); 
+    triggerMouseEvent (targetNode, "mouseup");
+    triggerMouseEvent (targetNode, "click");
+}
+else
+    console.log ("*** Target node not found!");
+
